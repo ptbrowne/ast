@@ -1,0 +1,29 @@
+{
+  "name": "ast",
+  "version": "0.0.1",
+  "description": "This is a playground to try esprima/escodegen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/huang47/ast.git"
+  },
+  "dependencies": {
+    "esprima": ">1.0.0",
+    "escodegen": "*"
+  },
+  "keywords": [
+    "ast",
+    "syntax",
+    "parser",
+    "javascript",
+    "esprima",
+    "escodegen"
+  ],
+  "author": "huang47",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "a16c0e8b4bf24a623afe0b8d093f666cb49d470a"
+}
