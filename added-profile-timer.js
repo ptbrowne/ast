@@ -46,7 +46,7 @@ var profile = function profile(label) {
   return time;
 };
 
-var codes = fs.readFileSync('main.js');
+var codes = fs.readFileSync('input.js');
 
 var ast = es.parse(codes.toString());
 codegen.traverse(ast, {
