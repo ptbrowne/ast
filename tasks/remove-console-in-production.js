@@ -1,6 +1,6 @@
 'use strict';
 
-var Task = require('./task');
+var Task = require('../task');
 
 var task = new Task('remove-console-in-production');
 

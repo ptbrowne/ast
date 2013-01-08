@@ -1,6 +1,6 @@
 'use strict';
 
-var Task = require('./task');
+var Task = require('../task');
 
 var gid = 0;
 var profile = function(label) {

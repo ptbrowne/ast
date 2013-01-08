@@ -11,8 +11,9 @@
     "url": "git://github.com/huang47/ast.git"
   },
   "dependencies": {
-    "esprima": ">1.0.0",
-    "escodegen": "*"
+    "esprima": ">=1.0.0",
+    "escodegen": "*",
+    "glob": ">=3.0.0"
   },
   "keywords": [
     "ast",
