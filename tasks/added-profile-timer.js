@@ -1,15 +1,9 @@
 'use strict';
 
-var fs = require('fs');
-var util = require('util');
-var es = require('esprima');
-var codegen = require('escodegen');
-var inspect = function(obj) {
-  console.log(util.inspect(obj, false, null));
-};
+var Task = require('./task');
 
 var gid = 0;
-var profile = function profile(label) {
+var profile = function(label) {
   var time = {
     begin: {
       type: 'ExpressionStatement',
@@ -46,23 +40,21 @@ var profile = function profile(label) {
   return time;
 };
 
-var codes = fs.readFileSync('input.js');
+var task = new Task('added-profile-timer');
 
-var ast = es.parse(codes.toString());
-codegen.traverse(ast, {
-  cursor: 0,
-  enter: function(node) {
-    var data;
+task.execute = function() {
+  this.escodegen.traverse(this.ast, {
+    cursor: 0,
+    enter: function(node) {
+      var data;
 
-    if ('FunctionDeclaration' === node.type || 'FunctionExpression' === node.type) {
-      data = profile(node.id && node.id.name);
-      node.body.body.unshift(data.begin);
-      node.body.body.push(data.end);
-      inspect(node);
-      inspect(codegen.generate(node));
+      if ('FunctionDeclaration' === node.type || 'FunctionExpression' === node.type) {
+        data = profile(node.id && node.id.name);
+        node.body.body.unshift(data.begin);
+        node.body.body.push(data.end);
+      }
     }
-  }
-});
-fs.writeFileSync('output.js', codegen.generate(ast, {
-  format: { indent: { style: '  ' } }
-}));
+  });
+};
+
+module.exports = task;
