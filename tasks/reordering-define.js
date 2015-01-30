@@ -10,16 +10,12 @@ var enumerate = function (arr) {
   return _.map(arr, function (v,k) { return [k,v]; });
 };
 
-var _priorities = enumerate([
-  'app',
-  'marionette',
-  'underscore',
-  'views/',
-  'models/'
-]);
+var getattr = function (k) {
+  return function (o) { return o[k]; };
+};
 
-var priority = function (name) {
-  var found = _.find(_priorities, function (n) {
+var priority = function (priorities, name) {
+  var found = _.find(priorities, function (n) {
     return new RegExp(n[1]).test(name);
   });
   return found ? found[0] : Infinity;
@@ -31,6 +27,14 @@ var multiSort = function (arrs, fn) {
   var unzipped = _.zip.apply(_, sorted);
   return unzipped;
 };
+
+var priorities = enumerate([
+  'app',
+  'marionette',
+  'underscore',
+  'views/',
+  'models/'
+]);
 
 task.execute = function() {
   estraverse.replace(this.ast, {
@@ -44,7 +48,8 @@ task.execute = function() {
         var arr = node.expression.arguments[0];
         var named_deps = arr.elements.slice(0, nbParams);
         var rest = arr.elements.slice(nbParams);
-        var sorted = multiSort([named_deps, fn.params], function (dep, param) { return priority(dep.value); });
+        var sorter =  _.compose(_.bind(priority, null, priorities), getattr('value'));
+        var sorted = multiSort([named_deps, fn.params], sorter);
         arr.elements = sorted[0].concat(rest);
         fn.params = sorted[1];
       }
