@@ -4,7 +4,9 @@ define([
   'views/toto',
   'marionette',
   'underscore',
-  'models/tata'
-], function (toto,marionette,_,tata) {
+  'models/tata',
+  'app',
+  'other_module'
+], function (toto,marionette,_,tata, app) {
 
 })

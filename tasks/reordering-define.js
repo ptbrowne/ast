@@ -48,10 +48,13 @@ task.execute = function() {
       if ('ExpressionStatement' === node.type &&
           'CallExpression' === node.expression.type &&
           'define' === node.expression.callee.name) {
-        var arr = node.expression.arguments[0];
         var fn = node.expression.arguments[1];
-        var order = getOrder(_.pluck(arr.elements, 'value'));
-        arr.elements = reorder(arr.elements, order);
+        var nbParams = fn.params.length;
+        var arr = node.expression.arguments[0];
+        var elems = arr.elements.slice(0, nbParams);
+        var rest = arr.elements.slice(nbParams);
+        var order = getOrder(_.pluck(elems, 'value'));
+        arr.elements = reorder(elems, order).concat(rest);
         fn.params = reorder(fn.params, order);
       }
     }
