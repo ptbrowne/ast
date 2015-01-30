@@ -13,7 +13,9 @@
   "dependencies": {
     "esprima": ">=1.0.0",
     "escodegen": "*",
-    "glob": ">=3.0.0"
+    "glob": ">=3.0.0",
+    "underscore": "^1.7.0",
+    "estraverse": "^1.9.1"
   },
   "keywords": [
     "ast",
@@ -26,5 +28,7 @@
   "author": "huang47",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "a16c0e8b4bf24a623afe0b8d093f666cb49d470a"
+  "gitHead": "a16c0e8b4bf24a623afe0b8d093f666cb49d470a",
+  "devDependencies": {
+  }
 }

@@ -42,8 +42,10 @@ var profile = function(label) {
 
 var task = new Task('added-profile-timer');
 
+var estraverse = require('estraverse');
+
 task.execute = function() {
-  this.escodegen.traverse(this.ast, {
+  estraverse.traverse(this.ast, {
     cursor: 0,
     enter: function(node) {
       var data;

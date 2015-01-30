@@ -1,10 +1,7 @@
-function foo() {
-    ;
-    return 'foo';
-    ;
-}
-function bar() {
-    ;
-    return 'bar';
-    ;
-}
+define([
+    'marionette',
+    'underscore',
+    'views/toto',
+    'models/tata'
+], function (marionette, _, toto, tata) {
+});
